@@ -1,0 +1,165 @@
+/* User Home Container */
+.user-home-container {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+/* User Home Container */
+
+.user-home-container .additional-container {
+    width: 100%;
+    padding: 0 20px;
+    max-width: 1500px;
+}
+/* User Home Container */
+/* User Home Container */
+
+/* Top Container */
+.user-home-container .additional-container .top-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0 40px 0;
+}
+/* Top Container */
+
+/* Join Box */
+.join-container { 
+    background-color: #E0E4EB;
+    border-radius: 6px;
+    min-height: 200px;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-container .join-box {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    background-color: #F0F1F5;
+    border-radius: 8px;
+    margin: 0 30px;
+}
+
+.join-container .join-box input {
+    font-family: "Satoshi Medium", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding: 14px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.join-container .join-box .join-btn {
+    font-family: "Satoshi Bold", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding: 14px 25px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: #121213;
+    color: #fff;
+    user-select: none;
+    cursor: pointer;
+}
+/* Join Box */
+
+/* Generate Box */
+.generate-container {
+    background-color: #E0E4EB;
+    min-height: 200px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.generate-container .generate-box {
+    margin-left: 10%;
+}
+
+.generate-container .generate-box h3 {
+    font-family: "Satoshi Bold", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
+.generate-container .generate-box .choice-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.generate-container .generate-box .choice-container span {
+    font-family: "Satoshi Bold", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.generate-container .generate-box .choice-container button {
+    font-family: "Satoshi Bold", Arial, Helvetica, sans-serif;
+    font-size: clamp(12px, 1.2vw, 14px);
+    background-color: #121213;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+}
+/* Generate Box */
+
+/* Bottom Container */
+.bottom-container h3{
+    font-family: "Satoshi Bold", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+/* Bottom Container */
+
+@media screen and (max-width: 1300px) {
+    .join-container { 
+        width: 50%;
+    }
+
+    .generate-container {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .user-home-container .additional-container .top-container {
+        flex-direction: column;
+    }
+
+    .join-container { 
+        width: 100%;
+    }
+
+    .generate-container {
+        width: 100%;
+    }
+}
+
+/* @media screen and (max-width: 500px) {
+    .generate-container .generate-box .choice-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+} */

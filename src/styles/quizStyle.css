@@ -1,0 +1,293 @@
+/* Quiz Manual Page */
+.quiz-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    padding: 0 0 30px;
+}
+
+.quiz-container .additional-container {
+    width: 100%;
+    padding: 0 20px;
+    max-width: 800px;
+}
+
+.quiz-container .additional-container .quiz-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-container .additional-container .quiz-container-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.quiz-container .additional-container .quiz-container-box h3{
+    font-family: "Satoshi Bold", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.quiz-container.manual .additional-container .quiz-container-box button {
+    font-family: "Satoshi Medium", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    background-color: #121213;
+    color: #fff;
+    user-select: none;
+    cursor: pointer;
+    margin: 30px 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quiz-container-box #quizName {
+    font-family: "Satoshi Medium", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid #E0E4EB;
+    outline: none;
+    width: 100%;
+    max-width: 250px;
+}
+
+.quiz-question-container {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    gap: 15px;
+    background-color: #F0F1F5;
+    border-radius: 6px;
+}
+
+.quiz-question-container .question-input {
+    font-family: "Satoshi Regular", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 14px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+
+}
+
+.quiz-question-container .option-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 10px;
+    column-gap: 20px;
+}
+
+.quiz-question-container .option-container .option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.quiz-question-container .option-container .option input {
+    width: 100%;
+    font-family: "Satoshi Regular", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 14px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+}
+
+.quiz-question-container .option-container .option .option-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.quiz-question-container .option-container .option .option-choices button {
+    aspect-ratio: 1;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border: none;
+    outline: none;
+    background-color: #D9D9D9;
+    user-select: none;
+    cursor: pointer;
+}
+
+.quiz-question-container .option-container .option .option-choices button:last-child {
+    border-radius: 50%;
+}
+/* Quiz Manual Page */
+
+/* Quiz AI Generate Page */
+.quiz-container.ai .additional-container {
+    max-width: 500px;
+}
+
+.quiz-container.ai .additional-container .submit-btn {
+    font-family: "Satoshi Medium", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background-color: #121213;
+    color: #fff;
+    margin-top: 20px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details {
+    width: 100%;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details div label {
+    font-family: "Satoshi Medium", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details div input {
+    font-family: "Satoshi Regular", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 14px;
+    border: 1px solid #E0E4EB;
+    outline: none;
+    border-radius: 6px;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details .multiple-div .multiple-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: fit-content;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details .multiple-div .multiple-options .option-button {
+    padding: 8px 10px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.quiz-container.ai .additional-container .quiz-container-box .quiz-generation-details .multiple-div .multiple-options .option-button.selected {
+    background-color: #121213;
+    color: #fff;
+}
+/* Quiz AI Generate Page */
+
+/* Quiz AI Acceptance Page */
+.quiz-container.acceptance .additional-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.quiz-container.acceptance .additional-container .left {
+    width: 30%;
+    padding: 25px;
+    background-color: #F0F1F5;
+    border-radius: 6px;
+    height: 100%;
+}
+
+.quiz-container.acceptance .additional-container .left h4 {
+    font-family: "Satoshi Medium", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.quiz-container.acceptance .additional-container .left .accepted-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 300px;
+}
+
+.quiz-container.acceptance .additional-container .left .accepted-list .accepted-box {
+    padding: 14px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.quiz-container.acceptance .additional-container .left .button-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.quiz-container.acceptance .additional-container .left .button-options button {
+    padding: 14px;
+    background-color: #121213;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    width: 100%;
+    user-select: none;
+    cursor: pointer;
+}
+
+.quiz-container.acceptance .additional-container .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    border: 1px solid red;
+
+    width: 100%;
+}
+
+.quiz-container.acceptance .additional-container .right .button-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.quiz-container.acceptance .additional-container .right .button-options button {
+    padding: 14px;
+    background-color: #121213;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    width: 100%;
+    user-select: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 880px) {
+    .quiz-container.acceptance .additional-container {
+        flex-direction: column-reverse;
+        gap: 15px;
+    }
+}
+/* Quiz AI Acceptance Page */

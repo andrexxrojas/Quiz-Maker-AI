@@ -1,0 +1,49 @@
+.home-container {
+    min-height: calc(100vh - 53px);
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-container .hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    margin: 0 20px;
+    color: #ffffff;
+}
+
+.home-container .hero-section h1 {
+    font-family: "Satoshi Black", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: clamp(32px, 3.5vw, 64px);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.home-container .hero-section p {
+    font-family: "Satoshi Regular", Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: clamp(14px, 1.2vw, 18px);
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 25px;
+}
+
+.home-container .hero-section button {
+    font-family: "Satoshi Regular", Arial, Helvetica, sans-serif;
+    font-size: clamp(12px, 1.2vw, 14px);
+    padding: 6px 8px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    background-color: #7961CE;
+    border: 1px solid #745ec4;
+    user-select: none;
+    cursor: pointer;
+}
