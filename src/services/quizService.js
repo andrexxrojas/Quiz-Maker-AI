@@ -1,9 +1,7 @@
 // import { useBridge } from "@react-three/fiber/dist/declarations/src/core/utils";
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000";
-const API_URL = "https://quiz-maker-final.vercel.app";
-
+const API_URL = "http://localhost:5000";
 
 // Helper function to get the token from localStorage
 const getToken = () => localStorage.getItem("token");
