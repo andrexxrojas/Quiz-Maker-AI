@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "src/pages/**/*.js", "use": "@vercel/react" },
+      { "src": "api/**/*.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/api/(.*)", "dest": "/api/$1" }
+    ]
+  }
+  

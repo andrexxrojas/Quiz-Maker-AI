@@ -45,7 +45,7 @@ const authMiddleware = (req, res, next) => {
 
 // To Register a new user
 app.post("/api/auth/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { firstName, lastName, username, email, password } = req.body;
 
   try {
     let user = await User.findOne({ $or: [{ email }, { username }] });
@@ -53,7 +53,7 @@ app.post("/api/auth/register", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    user = new User({ username, email, password });
+    user = new User({ firstName, lastName, username, email, password });
 
     // Hash password
     const salt = await bcrypt.genSalt(10);
@@ -68,7 +68,13 @@ app.post("/api/auth/register", async (req, res) => {
       if (err) throw err;
       res.json({
         token,
-        user: { id: user.id, username: user.username, email: user.email },
+        user: { 
+          id: user.id, 
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: user.username, 
+          email: user.email 
+        },
       });
     });
   } catch (err) {
@@ -138,7 +144,7 @@ app.get("/api/auth/user/:id", async (req, res) => {
 // Create a new quiz
 app.post("/api/quizzes", authMiddleware, async (req, res) => {
   try {
-    const { title, questions } = req.body;
+    const { gradeLevel, title, questions } = req.body;
 
     // Generate unique join code
     let joinCode;
@@ -154,6 +160,7 @@ app.post("/api/quizzes", authMiddleware, async (req, res) => {
 
     const newQuiz = new Quiz({
       title,
+      gradeLevel,
       joinCode,
       questions,
       user: req.user.id,

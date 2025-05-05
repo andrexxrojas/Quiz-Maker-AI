@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { generateQuizAI } from "../services/quizService";
 
-function CreateQuizAI({ setGenerated, setGeneratedQuiz }) {
+function CreateQuizAI({ setGenerated, setGeneratedQuiz, setPassData }) {
     const [formData, setFormData] = useState({
         topic: "",
         subTopic: "",
@@ -34,6 +34,7 @@ function CreateQuizAI({ setGenerated, setGeneratedQuiz }) {
             if (data && Array.isArray(data.questions)) {
                 console.log(data);
                 setGeneratedQuiz(data);  // Pass the quiz to QuizAI
+                setPassData(formData);
                 setGenerated(true);  // Indicate that the quiz was successfully generated
                 setQuizGenerated(true); // Disable further input
             }

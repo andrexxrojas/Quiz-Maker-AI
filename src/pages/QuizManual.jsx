@@ -7,6 +7,7 @@ import "../styles/quizStyle.css";
 
 function QuizManual() {
   const [quizName, setQuizName] = useState("");
+  const [gradeLevel, setGradeLevel] = useState("");
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -62,6 +63,8 @@ function QuizManual() {
       return setError("Please add at least one question");
 
     for (const question of questions) {
+      if (!gradeLevel.trim()) 
+        return setError("Please enter a grade level");
       if (!question.text.trim())
         return setError("All questions must have text");
       if (!question.options.some((opt) => opt.isCorrect))
@@ -80,7 +83,7 @@ function QuizManual() {
       }));
 
       setLoading(true); // Set loading state to true while submitting the quiz
-      await createQuiz({ title: quizName, questions: formattedQuestions });
+      await createQuiz({ title: quizName, gradeLevel: gradeLevel, questions: formattedQuestions });
       navigate("/userHome");
     } catch (err) {
       setError("Failed to create quiz");
@@ -105,6 +108,14 @@ function QuizManual() {
             value={quizName}
             onChange={(e) => setQuizName(e.target.value)}
             placeholder="Enter a quiz name"
+          />
+
+          <input 
+            id="gradeLevel"
+            type="text" 
+            value={gradeLevel}
+            onChange={(e) => setGradeLevel(e.target.value)}
+            placeholder="Enter a grade level"
           />
           <button onClick={addQuestion} className="add-question-btn">
             <i className="fa-solid fa-square-plus"></i>

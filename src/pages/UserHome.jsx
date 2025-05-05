@@ -84,15 +84,17 @@ function UserHome() {
         try {
           const user = await getSpecificUser(participant.user);
           return {
+            firstName: user.firstName,
+            lastName: user.lastName,
             userId: participant.user,
-            email: user.email,  // Include the email
             score: participant.score
           };
         } catch (error) {
           console.error(`Failed to fetch user ${participant.user}:`, error.message);
           return {
             userId: participant.user,
-            email: "Unknown",
+            firstName: "Unknown",
+            lastName: "",
             score: participant.score
           };
         }
@@ -172,9 +174,12 @@ function UserHome() {
                 <div key={quiz._id} className="quiz-item">
                   <div className="quiz-info">
                     <h4>{quiz.title}</h4>
-                    <p className="num-questions">
-                      Questions: {quiz.questions.length}
+                    <p className="grade-level">
+                      Grade: {quiz.gradeLevel}
                     </p>
+                    {/* <p className="num-questions">
+                      Questions: {quiz.questions.length}
+                    </p> */}
                     <p className="join-code">
                       Join Code: <strong>{quiz.joinCode}</strong>
                     </p>
@@ -215,7 +220,7 @@ function UserHome() {
             <table>
               <thead>
                 <tr>
-                  <th>Email</th>
+                  <th>Name</th>
                   <th>Score</th>
                 </tr>
               </thead>
@@ -227,7 +232,7 @@ function UserHome() {
                 ) : (
                   quizScores.map((score, index) => (
                     <tr key={index}>
-                      <td>{score.email}</td>
+                      <td>{score.firstName} {score.lastName}</td>
                       <td>{score.score}</td>
                     </tr>
                   ))

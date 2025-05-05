@@ -24,6 +24,10 @@ const quizSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  gradeLevel: {
+    type: String,
+    required: true,
+  },
   joinCode: {
     type: String,
     index: true,

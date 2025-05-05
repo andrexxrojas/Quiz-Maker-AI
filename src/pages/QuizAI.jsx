@@ -3,7 +3,7 @@ import GeneratedQuestion from "../components/GeneratedQuestion";
 import CreateQuizAI from "../pages/CreateQuizAI";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { createQuiz } from "../services/quizService";
+import { createQuiz, generateQuizAI } from "../services/quizService";
 
 import "../styles/quizStyle.css"
 
@@ -15,6 +15,7 @@ function QuizAI() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [acceptedQuestions, setAcceptedQuestions] = useState([]);
+    const [formData, setFormData] = useState(null);
 
     const { isAuthenticated, loading: authLoading, token } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -43,34 +44,133 @@ function QuizAI() {
         });
     };
 
-    const handleAcceptQuestion = () => {
+    const handleAcceptQuestion = async () => {
         if (generatedQuiz.length > 0) {
             const currentQuestion = generatedQuiz[currentQuestionIndex];
-
+    
             const hasCorrectAnswer = currentQuestion.options.some(opt => opt.isCorrect);
-
-            if(!hasCorrectAnswer) {
-                alert("The generated question must have one correct answer before accepting!")
-                return
+    
+            if (!hasCorrectAnswer) {
+                alert("The generated question must have one correct answer before accepting!");
+                return;
             }
-
-            setAcceptedQuestions(prev => [...prev, currentQuestion]);
-
+    
+            setAcceptedQuestions(prev => {
+                const updatedAcceptedQuestions = [...prev, currentQuestion];
+    
+                // If the number of accepted questions matches the required number, save the quiz
+                if (updatedAcceptedQuestions.length === formData.numQuestions) {
+                    handleSaveQuiz(updatedAcceptedQuestions);
+                }
+    
+                return updatedAcceptedQuestions;
+            });
+    
             if (currentQuestionIndex < generatedQuiz.length - 1) {
                 setCurrentQuestionIndex(prev => prev + 1);
             } else {
-                setGenerated(false);
+                setLoading(true);
+    
+            const existingQuestions = [
+                ...generatedQuiz.map(q => q.text),
+                ...acceptedQuestions.map(q => q.text)
+            ];
+    
+            const prompt = `Generate a new ${formData.difficulty.toLowerCase()}-level ${formData.questionType.toLowerCase()} question  
+            for the topic "${formData.topic}" and subtopic "${formData.subTopic}".  
+            The question should follow a "${formData.questionStyle.toLowerCase()}" style and be suitable for a grade ${formData.grade} student.  
+            Provide four answer choices, with one correct answer clearly indicated.
+    
+            ### Important: 
+            - Do NOT generate a question that is similar to these existing ones:  
+              "${existingQuestions.join("; ")}".  
+            - Ensure the question is **unique** and **different** from these.`;
+    
+            try {
+                const newQuestionData = await generateQuizAI(prompt);
+    
+                if (newQuestionData?.questions?.length > 0) {
+                    const newQuestion = newQuestionData.questions[0];
+    
+                    const formattedQuestion = {
+                        text: newQuestion.question,
+                        options: newQuestion.choices.map(choice => ({
+                            id: Math.random().toString(36).substr(2, 9),
+                            text: choice,
+                            isCorrect: choice === newQuestion.correctAnswer
+                        }))
+                    };
+    
+                    setGeneratedQuiz(prevQuiz => {
+                        const updatedQuiz = [...prevQuiz, formattedQuestion];
+    
+                        // Then, ensure we update the current index correctly
+                        setCurrentQuestionIndex(updatedQuiz.length - 1); // Move to the newly added question
+                        return updatedQuiz;
+                    });
+                }
+            } catch (err) {
+                console.error("Error generating new question:", err);
+            }
             }
         }
     };
+    
 
-    const handleDeclineQuestion = () => {
+    const handleDeclineQuestion = async () => {
         if (currentQuestionIndex < generatedQuiz.length - 1) {
+            // Move to the next question if available
             setCurrentQuestionIndex(prev => prev + 1);
         } else {
-            setGenerated(false);
+            // Generate a new unique question
+            setLoading(true);
+    
+            const existingQuestions = [
+                ...generatedQuiz.map(q => q.text),
+                ...acceptedQuestions.map(q => q.text)
+            ];
+    
+            const prompt = `Generate a new ${formData.difficulty.toLowerCase()}-level ${formData.questionType.toLowerCase()} question  
+            for the topic "${formData.topic}" and subtopic "${formData.subTopic}".  
+            The question should follow a "${formData.questionStyle.toLowerCase()}" style and be suitable for a grade ${formData.grade} student.  
+            Provide four answer choices, with one correct answer clearly indicated.
+    
+            ### Important: 
+            - Do NOT generate a question that is similar to these existing ones:  
+              "${existingQuestions.join("; ")}".  
+            - Ensure the question is **unique** and **different** from these.`;
+    
+            try {
+                const newQuestionData = await generateQuizAI(prompt);
+    
+                if (newQuestionData?.questions?.length > 0) {
+                    const newQuestion = newQuestionData.questions[0];
+    
+                    const formattedQuestion = {
+                        text: newQuestion.question,
+                        options: newQuestion.choices.map(choice => ({
+                            id: Math.random().toString(36).substr(2, 9),
+                            text: choice,
+                            isCorrect: choice === newQuestion.correctAnswer
+                        }))
+                    };
+    
+                    setGeneratedQuiz(prevQuiz => {
+                        const updatedQuiz = [...prevQuiz, formattedQuestion];
+    
+                        // Then, ensure we update the current index correctly
+                        setCurrentQuestionIndex(updatedQuiz.length - 1); // Move to the newly added question
+                        return updatedQuiz;
+                    });
+                }
+            } catch (err) {
+                console.error("Error generating new question:", err);
+            }
+    
+            setLoading(false);
         }
     };
+    
 
     const handleNewQuizGeneration = (quiz) => {
         console.log("Received quiz data:", quiz);
@@ -113,7 +213,7 @@ function QuizAI() {
                 }))
             }));
     
-            await createQuiz({ title: generatedQuizTitle, questions: formattedQuestions }, token);
+            await createQuiz({ title: generatedQuizTitle, gradeLevel: formData.grade, questions: formattedQuestions }, token);
             
             setGenerated(false);
             setGeneratedQuiz({ quizTitle: "", questions: [] });
@@ -132,6 +232,7 @@ function QuizAI() {
                 <CreateQuizAI 
                 setGenerated={setGenerated} 
                 setGeneratedQuiz={handleNewQuizGeneration}
+                setPassData={setFormData}
                 />
             )}
 

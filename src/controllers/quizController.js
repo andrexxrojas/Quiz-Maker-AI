@@ -4,7 +4,7 @@ const Quiz = require('../models/Quiz');
 
 const createQuiz = async (req, res) => {
     try {
-        const { title, questions } = req.body;
+        const { title, questions, gradeLevel } = req.body;
         
         // Generate a unique join code for the quiz
         const joinCode = generateJoinCode();
@@ -12,6 +12,7 @@ const createQuiz = async (req, res) => {
         // Create the new quiz object
         const newQuiz = new Quiz({
             title,
+            gradeLevel,
             questions,
             joinCode, // Add the generated join code to the quiz
         });

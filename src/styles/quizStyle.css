@@ -77,6 +77,19 @@
     background-color: #E6E8EC;
 }
 
+.quiz-container-box #gradeLevel {
+    font-family: "Satoshi Medium", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    width: 100%;
+    max-width: 250px;
+    background-color: #E6E8EC;
+    margin-top: 15px;
+}
+
 .quiz-question-container {
     display: flex;
     flex-direction: column;
